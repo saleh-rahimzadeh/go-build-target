@@ -5,7 +5,9 @@ The **go-build-target** is a build target provider for Golang projects.
 
 ---
 
-Install:
+## Install
+
+Get:
 
 ```sh
 go get -u github.com/saleh-rahimzadeh/go-build-target
@@ -19,7 +21,11 @@ import (
 )
 ```
 
-Use:
+---
+
+## Use
+
+Get instance:
 
 ```go
 var b buildtarget.BuildTarget = buildtarget.DEVELOP
@@ -42,9 +48,11 @@ case RELEASE:
 
 ---
 
-Conditional target building:
+## Conditional target building
 
-- `<file>.develop.go`:
+Develop file:
+
+Create `<file>.develop.go` file:
 
 ```go
 //go:build !release
@@ -54,7 +62,7 @@ package myapp
 const Address string = "http://localhost:8080"
 ```
 
-- `<file>.release.go`:
+Create `<file>.release.go` file:
 
 ```go
 //go:build release
@@ -64,7 +72,7 @@ package myapp
 const Address string = "http://www.myapp.com"
 ```
 
-- `main.go`:
+Use in `main.go`:
 
 ```go
 fmt.Println("Address: ", Address)
@@ -80,4 +88,22 @@ Build for release:
 
 ```sh
 go build -tags release
+```
+
+---
+
+## Contributing
+
+Install `stringer`:
+
+```sh
+go get -tool golang.org/x/tools/cmd/stringer
+```
+
+Execute:
+
+```sh
+go generate
+# OR
+go tool stringer -type BuildTarget -linecomment -output build-target_string.go
 ```
